@@ -1,0 +1,19 @@
+{
+  "name": "coffeelatte",
+  "version": "1.0.0",
+  "description": "Render engine with Embeded JS, layout and components support.",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "node-html-parser": "^1.2.21"
+  },
+  "author": "Sammwy",
+  "license": "ISC",
+  "keywords": ["render engine", "render", "engine", "javascript", "template", "layout", "express", "components", "component"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sammwyy/coffeelatte.git"
+  }
+}

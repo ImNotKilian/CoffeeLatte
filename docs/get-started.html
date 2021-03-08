@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="coffee.png" type="image/x-icon">
+    <title>CoffeeLatte - Documentation</title>
+</head>
+<body>
+
+    <div class="navbar" id="get-started">
+        <a href="/">
+            <img class="logo" src="coffee.png" alt="latte icon">
+            <div class="brand-container">
+                <h1 class="brand dark">Coffeelatte</h1>
+            </div>
+        </a>
+    </div>
+
+    <div class="container-get-started">
+        <div class="side">
+            <ul class="item-list">
+                <li class="item"><a href="#get-started"><h3>Get started</h3></a></li>
+                <li class="item"><a href="#using-in-express">Using in express</a></li>
+                <li class="item"><a href="#layout">Layout</a></li>
+                <li class="item"><a href="#code-blocks">Code blocks</a></li>
+                <li class="item"><a href="#async-functions">Async functions</a></li>
+                <li class="item"><a href="#locals-variables">Locals variables</a></li>
+                <li class="item"><a href="#components">Components</a></li>
+                <li class="item"><a href="#props">Props</a></li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <h2>Get started</h2>
+            <p>To start using CoffeeLatte it is necessary to first install the module. For this you can use the following command in your preferred terminal:
+                <pre><span class="color-1">npm</span> <span class="color-2">install</span> <span class="color-3">@sammwy/coffeelatte</span></pre>
+                <i>Note: You need to have Node.js and NPM installed on the system.</i>
+            </p>
+
+            <h2 class="spaced" id="using-in-express">Using in express</h2>
+            <p>To use CoffeeLatte in express, you just have to configure it as follows:
+                <pre>
+<span class="color-7">// Import libraries</span>
+<span class="color-4">const</span> <span class="color-2">latte</span><span class="color-3"> = </span>require(<span class="color-11">"@sammwy/coffeelatte"</span>);
+<span class="color-4">const</span> <span class="color-2">express</span><span class="color-3"> = </span>require(<span class="color-11">"express"</span>);
+<span class="color-4">const</span> <span class="color-2">path</span><span class="color-3"> = </span>require(<span class="color-11">"path"</span>);
+
+<span class="color-7">// Create application</span>
+<span class="color-4">const</span> <span class="color-2">app</span><span class="color-3"> = </span><span class="color-13">express</span>();
+
+<span class="color-7">// Configure coffeelatte</span>
+<span class="color-2">app</span><span class="color-3">.</span><span class="color-13">set</span>(<span class="color-11">"views"</span>, <span class="color-2">path</span><span class="color-3">.</span><span class="color-13">join</span>(__dirname, <span class="color-11">"views"</span>));
+<span class="color-2">app</span><span class="color-3">.</span><span class="color-13">set</span>(<span class="color-11">"components"</span>, <span class="color-2">path</span><span class="color-3">.</span><span class="color-13">join</span>(__dirname, <span class="color-11">"components"</span>));
+<span class="color-2">app</span><span class="color-3">.</span><span class="color-13">set</span>(<span class="color-11">"layout"</span>, <span class="color-2">path</span><span class="color-3">.</span><span class="color-13">join</span>(__dirname, <span class="color-11">"demo_layout<span class="color-3">.</span>html"</span>));
+<span class="color-2">app</span><span class="color-3">.</span><span class="color-13">set</span>(<span class="color-11">"target"</span>, <span class="color-11">"#root"</span>);
+
+<span class="color-7">// Enable coffeelatte in the express application</span>
+<span class="color-2">latte</span><span class="color-3">.</span><span class="color-13">express</span>(<span class="color-1">app</span>);
+
+<span class="color-7">// Render a view</span>
+<span class="color-2">app</span><span class="color-3">.</span><span class="color-13">get</span>(<span class="color-11">"/"</span>, (req, res) => {
+    <span class="color-2">res</span><span class="color-3">.</span><span class="color-13">render</span>(<span class="color-11">"demo"</span>);
+});
+
+<span class="color-7">// Start the server</span>
+<span class="color-2">app</span><span class="color-3">.</span><span class="color-13">listen</span>(4000, () => {
+<span class="color-2">console</span><span class="color-3">.</span><span class="color-13">log</span>(<span class="color-11">"Server listening at port 4000"</span>);
+})
+                </pre>
+
+                <h2 class="spaced" id="layout">Layout</h2>
+                <p>
+                    With the help of layouts, you can create a template that will be present on each page to be rendered. In turn, the rendered view will be displayed within the configured target.
+                    <pre>app.set("target", "#root");</pre>
+                    <pre>
+<span class="color-4">&lt;</span>!DOCTYPE html<span class="color-4">&gt;</span>
+<span class="color-4">&lt;</span><span class="color-11">html</span> <span class="color-2">lang=&quot;en&quot;</span><span class="color-4">&gt;</span>
+<span class="color-4">&lt;</span><span class="color-11">head</span><span class="color-4">&gt;</span>
+    <span class="color-4">&lt;</span><span class="color-11">meta</span> <span class="color-2">charset=&quot;UTF-8&quot;</span><span class="color-4">&gt;</span>
+    <span class="color-4">&lt;</span><span class="color-11">meta</span> <span class="color-2">name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;</span><span class="color-4">&gt;</span>
+    <span class="color-4">&lt;</span><span class="color-11">title</span><span class="color-4">&gt;</span>Coffeelatte demo<span class="color-4">&lt;</span><span class="color-11">/title</span><span class="color-4">&gt;</span>
+<span class="color-4">&lt;</span><span class="color-11">/head</span><span class="color-4">&gt;</span>
+<span class="color-4">&lt;</span><span class="color-11">body</span><span class="color-4">&gt;</span>
+    <span class="color-4">&lt;</span><span class="color-11">app</span> <span class="color-2">id=&quot;root&quot;</span><span class="color-4">&gt;</span><span class="color-4">&lt;</span><span class="color-11">/app<span class="color-4">&gt;</span>
+<span class="color-4">&lt;</span><span class="color-11">/body</span><span class="color-4">&gt;</span>
+<span class="color-4">&lt;</span><span class="color-11">/html</span><span class="color-4">&gt;</span>
+                    </pre>
+                </p>
+
+                <h2 class="spaced">Embed javascript</h2>
+                <p>We can select variables in the frontend brought from nodejs, mathematical operations and any javascript expression and then show its value using the following syntax:
+
+                <pre>
+<span class="color-4">&lt;</span><span class="color-11">p</span><span class="color-4">&gt;</span>Te result is {{ 1 + 2 }}<span class="color-4">&lt;</span><span class="color-11">/p</span><span class="color-4">&gt;</span>
+</pre>
+                </p>
+
+                <h2 class="spaced" id="code-blocks">Code blocks</h2>
+                <p>The block code is a way to run javascript code on the server directly from the html file.</p>
+                <p>Additionally, it provides us with a new function that allows us to display a text or create a label in the document.</p>
+                <pre>
+<span class="color-4">&lt;</span><span class="color-11">h1</span><span class="color-4">&gt;</span>Hello world<span class="color-4">&lt;</span><span class="color-11">/h1</span><span class="color-4">&gt;</span>
+
+{{
+    let first = 5;
+    let second = 3;
+
+    let result = first + second;
+    print(result);
+}}
+</pre>
+            </p>
+
+            <h2 class="spaced" id="async-functions">Async functions</h2>
+            <p>The functions within the code blocks are totally asynchronous, this means that we can make GET & POST requests, setTimeout or any operation that takes time to complete and the website will just be sent when the asynchronous function is resolved.
+<pre>
+{{
+    setTimeout(() => {
+        print("This page tooks 2 seconds to load");
+    }, 2000);
+}}
+</pre>
+            </p>
+
+            <h2 class="spaced" id="locals-variables">Locals variables</h2>
+            <p>we can share variables between blocks of code using the locals object. By example:
+                <pre>
+{{
+    locals.foo = "bar";
+}}
+
+
+
+{{
+    print(locals.foo);
+}}
+</pre>
+
+
+                We can also use local variables to bring us data when rendering a view, by example:
+                <pre>
+<span class="color-7">// app.js</span>
+res.render("myview", { foo: "bar" });
+
+<span class="color-7">// myview.latte</span>
+{{ locals.foo }}
+
+{{
+    print(locals.foo)
+}}
+</pre>
+            </p>
+
+            <h2 class="spaced" id="components">Components</h2>
+            <p>It is enough to place the components in files with extension .html or .latte in the folder configured using <pre>app.set("components", "directory");</pre> Then we can import them in the frontend calling them with a tag with the file name, in example "foo.component.html" would be imported as follows:
+                <pre>
+<span class="color-7">// For import foo.component.html in /components directory, use:</span>
+<span class="color-4">&lt;</span><span class="color-11">Foo/</span><span class="color-4">&gt;
+</pre>
+
+                <i>Note: Even if the file starts with a lower case, the label name must start with a capital letter. The file name must end in .component.html or .component.latte</i>
+            </p>
+
+            <h2 class="spaced" id="Props">Props</h2>
+            <p>When calling components, we can pass properties which we can easily obtain in a block of code. By example:
+                <pre>
+<span class="color-7">// Call a component with Props</span>
+<span class="color-4">&lt;</span><span class="color-11">User</span> username="foo" age="7"/</span><span class="color-4">&gt;</span>
+<span class="color-4">&lt;</span><span class="color-11">User</span> username="sammwy" age="18"/</span><span class="color-4">&gt; </span>
+<span class="color-4">&lt;</span><span class="color-11">User</span> username="john" age="56"/</span><span class="color-4">&gt;</span>
+
+<span class="color-7">// user.component.html file:</span>
+<span class="color-4">&lt;</span><span class="color-11">b</span><span class="color-4">&gt;</span>Username: {{ props.username }}<span class="color-4">&lt;</span><span class="color-11">/b</span><span class="color-4">&gt;</span>
+<span class="color-4">&lt;</span><span class="color-11">b</span><span class="color-4">&gt;</span>Age: {{ props.age }}<span class="color-4">&lt;</span><span class="color-11">/b</span><span class="color-4">&gt;</span>
+</pre>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,5 @@
+exports.renderError = (error) => {
+    let text = error.stack
+    console.error(error);
+    return `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Internal server error</title> <style>body{background: #252525; font-family: Arial, Helvetica, sans-serif; font-size: 18px; color: #eee;}.container{margin: 5% auto; max-width: 900px; width: auto;}.danger{color: red;}pre{font-size: 14px; width: auto; background-color: black; padding: 15px 20px; border-radius: 20px;}.small{font-size: 14px; font-family: 'Courier New', Courier, monospace; color: #AAA;}</style></head><body> <div class="container"> <h1 class="danger">An exception has occurred.</h1> <p>Apparently Latte could not parse the content of the website, possibly a configuration error or a syntax error.</p><pre>${text}</pre><i class="small">Internal server error (500) in development mode</i></div></body></html>`
+}
